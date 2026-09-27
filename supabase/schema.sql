@@ -55,6 +55,12 @@ create table public.dividas (
   ativa boolean not null default true
 );
 
+create index household_members_user_id_idx on public.household_members (user_id);
+create index categorias_household_id_idx on public.categorias (household_id);
+create index transacoes_household_id_idx on public.transacoes (household_id);
+create index transacoes_categoria_id_idx on public.transacoes (categoria_id);
+create index dividas_household_id_idx on public.dividas (household_id);
+
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -137,6 +143,13 @@ create policy "profiles_update_household"
       join public.household_members hm2 on hm1.household_id = hm2.household_id
       where hm1.user_id = auth.uid()
     )
+  )
+  with check (
+    id in (
+      select hm2.user_id from public.household_members hm1
+      join public.household_members hm2 on hm1.household_id = hm2.household_id
+      where hm1.user_id = auth.uid()
+    )
   );
 
 create policy "households_member_access"
@@ -164,8 +177,5 @@ create policy "dividas_member_access"
   using (household_id in (select public.user_household_ids()))
   with check (household_id in (select public.user_household_ids()));
 
--- Convidar parceiro(a): após ela se cadastrar, o owner executa:
--- insert into public.household_members (household_id, user_id, papel)
--- select hm.household_id, '<uuid-da-parceira>'::uuid, 'member'
--- from public.household_members hm where hm.user_id = auth.uid() and hm.papel = 'owner'
--- limit 1;
+-- Para duas pessoas compartilharem os dados, rode supabase/adicionar-parceiro.sql
+-- depois de criar as duas contas.

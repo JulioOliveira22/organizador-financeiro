@@ -53,7 +53,7 @@ VITE_SUPABASE_ANON_KEY=sua-anon-key
 ```
 
 4. Crie os usuários pelo painel do Supabase (**Authentication → Users**). O app não tem tela de cadastro, então vale desativar o cadastro público em **Authentication → Sign In / Providers**.
-5. Para que duas pessoas compartilhem os mesmos dados, a segunda precisa ser adicionada ao `household` da primeira. O comando está comentado no final do `schema.sql`.
+5. Para que duas pessoas compartilhem os mesmos dados, rode o [`supabase/adicionar-parceiro.sql`](supabase/adicionar-parceiro.sql) com os e-mails das duas contas. Ele coloca a segunda pessoa no `household` da primeira e define os nomes.
 
 ## Estrutura
 

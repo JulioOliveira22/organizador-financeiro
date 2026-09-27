@@ -175,6 +175,7 @@ export function createSupabaseRepository(): FinanceRepository {
         .from('profiles')
         .select('id, nome, salario_bruto, descontos')
         .in('id', ids)
+        .order('created_at')
       if (error) throw new Error(error.message)
 
       const { data: authData } = await supabase.auth.getUser()
