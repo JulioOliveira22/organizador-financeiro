@@ -15,6 +15,7 @@ export const partnerTheme = {
       'border border-blue-200 bg-gradient-to-br from-blue-50 to-white shadow-sm shadow-blue-500/10 hover:shadow-md hover:shadow-blue-500/15',
     editBtn: 'bg-blue-100 text-blue-700 hover:bg-blue-200 border-0',
     dot: 'bg-blue-600',
+    text: 'text-blue-600',
   },
   her: {
     avatar:
@@ -24,6 +25,7 @@ export const partnerTheme = {
       'border border-rose-200 bg-gradient-to-br from-rose-50 to-white shadow-sm shadow-rose-500/10 hover:shadow-md hover:shadow-rose-500/15',
     editBtn: 'bg-rose-100 text-rose-700 hover:bg-rose-200 border-0',
     dot: 'bg-rose-500',
+    text: 'text-rose-500',
   },
 } as const
 

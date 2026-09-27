@@ -60,6 +60,12 @@ export function parcelasNoMes(dividas: Divida[], month: Date): ParcelaDoMes[] {
     .filter((p): p is ParcelaDoMes => p != null)
 }
 
+/** Data de vencimento da parcela no mês (ajusta dia 31 em meses menores) */
+export function vencimentoNoMes(divida: Divida, month: Date): Date {
+  const dia = Math.min(divida.diaVencimento, endOfMonth(month).getDate())
+  return new Date(month.getFullYear(), month.getMonth(), dia)
+}
+
 /** Parcelamentos ativos que ainda não começaram no mês de referência */
 export function parcelamentosFuturos(dividas: Divida[], month: Date): {
   divida: Divida
